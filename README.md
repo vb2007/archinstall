@@ -1,0 +1,2 @@
+# archinstall
+archinstall go brrrr
