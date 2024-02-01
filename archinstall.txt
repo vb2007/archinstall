@@ -1,0 +1,92 @@
+loadkeys hu
+timedatectl set-ntp true
+
+lsblk
+cfdisk /dev/sdX # a megfelelő lemez
+  New
+  1G
+  Type
+  EFI System
+  New
+  [Amennyi ramod van gigában]G
+  Type
+  Linux swap
+  New
+  [Maradék hely]
+  Type
+  Linux filesystem
+  Write
+  yes
+  Quit
+
+mkfs.fat -F32 /dev/sdX1
+mkswap /dev/sdX2
+swapon /dev/sdX2
+mkfs.ext4 /dev/sdX3
+
+mount /dev/sdX3 /mnt
+mkdir /mnt/boot
+mount /dev/sdX1 /mnt/boot
+
+pacman -S nano ---ha nincs nano telepítve
+nano /etc/pacman.conf
+  #[multilib] -> [multilib]
+  #Include = /etc/pacman.d/mirrorlist -> Include = /etc/pacman.d/mirrorlist
+  #Color ---uncomment
+  IloveCandy
+
+pacstrap /mnt base base-devel linux linux-firmware git nano [intel vagy amd, a procidtól függ]-ucode
+genfstab -U /mnt >> /mnt/etc/fstab
+
+arch-chroot /mnt
+ln -sf /usr/share/zoneinfo/Europe/Budapest /etc/localtime
+hwclock --systohc
+
+nano /etc/locale.gen
+  #en_US.UTF-8 UTF-8 -> en_US.UTF-8 UTF-8
+
+locale-gen
+echo LANG=en_US.UTF-8 > /etc/locale.conf
+
+echo [választott hostname] > /etc/hostname
+nano /etc/hosts
+  127.0.0.1 [TAB] localhost
+  ::1 [TAB] localhost
+  127.0.0.1 [TAB] [választott hostname].localdomain [választott hostname]
+
+mkinitpcio -P
+
+pacman -S networkmanager
+systemctl enable NetworkManager
+
+passwd
+  [válaszott root jelszó, kétszer]
+
+useradd -m [választott felhasználónév]
+passwd [választott felhasználónév]
+usermod -aG wheel,storage,power [választott felhasználónév]
+nano /etc/sudoers
+  #%wheel ALL=(ALL:ALL) ALL -> %wheel ALL=(ALL:ALL) ALL
+  [opcionális] Defaults timestamp_timeout=[0 hogy mindig kérjen sudo-hoz jelszót, pozitív szám hogy mennyi percig ne, negatív szám hogy egy session-ben csak egyszer kérjen]
+
+pacman -S grub efibootmgr
+
+grub-install --target=x86_64-efi --efi-directory=/boot
+grub-mkconfig -o /boot/grub/grub.cfg
+
+exit
+reboot
+
+--------
+
+c --> grub shell
+ls (hd0,gpt1)/ ---mindegyik partícióval, majd felírom azt, amiben van efi/ mappa
+---majd boot archba
+sudo nano /etc/grub/grub.cfg
+   ---'Arch Linux' rész alá
+   menuentry 'Winfos 10/11'{
+     insmod part_gpt
+     set root=(hd0,gpt1) ---vagy amiben az efi/ mappa volt
+     chainloader /efi/Microsoft/Boot/bootmgfw.efi
+     boot
+   }
