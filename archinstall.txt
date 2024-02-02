@@ -86,6 +86,7 @@ sudo nano /etc/grub/grub.cfg
    ---'Arch Linux' rész alá
    menuentry 'Winfos 10/11'{
      insmod part_gpt
+     insmod chain
      set root=(hd0,gpt1) ---vagy amiben az efi/ mappa volt
      chainloader /efi/Microsoft/Boot/bootmgfw.efi
      boot
