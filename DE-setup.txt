@@ -1,0 +1,1 @@
+sudo pacman -S hyprland waybar neofetch kitty thunar libreoffice openssh
