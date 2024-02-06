@@ -33,7 +33,7 @@ nano /etc/pacman.conf
   #[multilib] -> [multilib]
   #Include = /etc/pacman.d/mirrorlist -> Include = /etc/pacman.d/mirrorlist
   #Color ---uncomment
-  IloveCandy
+  ILoveCandy
 
 pacstrap /mnt base base-devel linux linux-firmware git nano [intel vagy amd, a procidtól függ]-ucode
 genfstab -U /mnt >> /mnt/etc/fstab
