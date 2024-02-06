@@ -82,7 +82,7 @@ reboot
 c --> grub shell
 ls (hd0,gpt1)/ ---mindegyik partícióval, majd felírom azt, amiben van efi/ mappa
 ---majd boot archba
-sudo nano /etc/grub/grub.cfg
+sudo nano /boot/grub/grub.cfg
    ---'Arch Linux' rész alá
    menuentry 'Winfos 10/11'{
      insmod part_gpt
