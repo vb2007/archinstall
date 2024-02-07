@@ -1,0 +1,2 @@
+sudo nano ~/.bashrc
+  neofetch #add line to file
