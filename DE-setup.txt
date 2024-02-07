@@ -31,4 +31,5 @@ sudo systemctl enable autologin@tty1.service
 
 #waybar setup
 sudo cp /etc/xdg/waybar/ ~/.config/waybar/
+sudo nano ~/.config/waybar/config
   hyprland/workspaces #from sway/workspaces
