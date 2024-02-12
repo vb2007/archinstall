@@ -33,6 +33,7 @@ nano /etc/pacman.conf
   #[multilib] -> [multilib]
   #Include = /etc/pacman.d/mirrorlist -> Include = /etc/pacman.d/mirrorlist
   #Color ---uncomment
+  #ParallelDownloads = 5 --uncomment
   ILoveCandy
 
 pacstrap /mnt base base-devel linux linux-firmware git nano [intel vagy amd, a procidtól függ]-ucode
@@ -53,6 +54,9 @@ nano /etc/hosts
   127.0.0.1 [TAB] localhost
   ::1 [TAB] localhost
   127.0.0.1 [TAB] [választott hostname].localdomain [választott hostname]
+
+nano /etc/vconsole.conf
+  #KEYMAP=us -> KEYMAP=hu
 
 mkinitpcio -P
 
