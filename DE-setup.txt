@@ -4,7 +4,7 @@ sudo systemctl start sshd
 
 #Hyprland autostart
 sudo nano ~/.bash_profile
-  if [[ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]]; then
+  if [[ -z "${DISPLAY}" ]] && [[ "${XDG_VTNR}" -eq 1 ]]; then
       Hyprland
   fi
 
