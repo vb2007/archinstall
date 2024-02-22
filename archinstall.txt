@@ -2,17 +2,17 @@ loadkeys hu
 timedatectl set-ntp true
 
 lsblk
-cfdisk /dev/sdX # a megfelelő lemez
+cfdisk /dev/sdX # where X is the correct disk
   New
   1G
   Type
   EFI System
   New
-  [Amennyi ramod van gigában]G
+  [Your machine's total RAM]G
   Type
   Linux swap
   New
-  [Maradék hely]
+  [Rest of the space]
   Type
   Linux filesystem
   Write
@@ -28,23 +28,22 @@ mount /dev/sdX3 /mnt
 mkdir /mnt/boot
 mount /dev/sdX1 /mnt/boot
 
-pacman -S nano ---ha nincs nano telepítve
 nano /etc/pacman.conf
-  #[multilib] -> [multilib]
-  #Include = /etc/pacman.d/mirrorlist -> Include = /etc/pacman.d/mirrorlist
-  #Color ---uncomment
-  #ParallelDownloads = 5 --uncomment
-  ILoveCandy
+  #[multilib] # <-- uncomment
+  #Include = /etc/pacman.d/mirrorlist # <- uncomment
+  #Color # <- uncomment
+  #ParallelDownloads = 5 # <- uncomment
+  ILoveCandy # add line
 
-pacstrap /mnt base base-devel linux linux-firmware git nano [intel vagy amd, a procidtól függ]-ucode
+pacstrap /mnt base base-devel linux linux-firmware git nano [intel or amd]-ucode
 genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt
-ln -sf /usr/share/zoneinfo/Europe/Budapest /etc/localtime
+ln -sf /usr/share/zoneinfo/Europe/Budapest /etc/localtime # or other relevant timezone
 hwclock --systohc
 
 nano /etc/locale.gen
-  #en_US.UTF-8 UTF-8 -> en_US.UTF-8 UTF-8
+  #en_US.UTF-8 UTF-8 # <- uncomment
 
 locale-gen
 echo LANG=en_US.UTF-8 > /etc/locale.conf
@@ -53,10 +52,10 @@ echo [választott hostname] > /etc/hostname
 nano /etc/hosts
   127.0.0.1 [TAB] localhost
   ::1 [TAB] localhost
-  127.0.0.1 [TAB] [választott hostname].localdomain [választott hostname]
+  127.0.0.1 [TAB] [choosen hostname].localdomain [choosen hostname]
 
 nano /etc/vconsole.conf
-  #KEYMAP=us -> KEYMAP=hu
+  #KEYMAP=us # <- change to: KEYMAP=hu
 
 mkinitpcio -P
 
@@ -64,14 +63,14 @@ pacman -S networkmanager
 systemctl enable NetworkManager
 
 passwd
-  [válaszott root jelszó, kétszer]
+  [choosen root password, twice]
 
-useradd -m [választott felhasználónév]
-passwd [választott felhasználónév]
-usermod -aG wheel,storage,power [választott felhasználónév]
+useradd -m [choosen username]
+passwd [choosen username]
+usermod -aG wheel,storage,power [choosen username]
 nano /etc/sudoers
-  #%wheel ALL=(ALL:ALL) ALL -> %wheel ALL=(ALL:ALL) ALL
-  [opcionális] Defaults timestamp_timeout=[0 hogy mindig kérjen sudo-hoz jelszót, pozitív szám hogy mennyi percig ne, negatív szám hogy egy session-ben csak egyszer kérjen]
+  #%wheel ALL=(ALL:ALL) ALL # <- uncomment
+  #[optional]# Defaults timestamp_timeout=[when using sudo... 0 = always ask for password, positive number = don't ask for X minutes, negative number = only ask once in a session]
 
 pacman -S grub efibootmgr
 
@@ -81,17 +80,18 @@ grub-mkconfig -o /boot/grub/grub.cfg
 exit
 reboot
 
---------
+# DUALBOOT to Windows
 
-c --> grub shell
-ls (hd0,gpt1)/ ---mindegyik partícióval, majd felírom azt, amiben van efi/ mappa
----majd boot archba
+c # to enter grub shell
+ls # to list disks and partitions
+ls (hd0,gpt1)/ # go through partitions, and find the /efi folder
+# then boot to Arch
 sudo nano /boot/grub/grub.cfg
-   ---'Arch Linux' rész alá
+   # beneath the 'Arch Linux' part
    menuentry 'Winfos 10/11'{
      insmod part_gpt
      insmod chain
-     set root=(hd0,gpt1) ---vagy amiben az efi/ mappa volt
+     set root=(hd0,gpt1) # or where the /efi folder was
      chainloader /efi/Microsoft/Boot/bootmgfw.efi
      boot
    }
