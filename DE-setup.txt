@@ -3,7 +3,7 @@ sudo systemctl enable sshd
 sudo systemctl start sshd
 
 #Hyprland autostart
-sudo nano ~/.bash_profile
+nano ~/.bash_profile
   if [[ -z "${DISPLAY}" ]] && [[ "${XDG_VTNR}" -eq 1 ]]; then
       Hyprland
   fi
@@ -30,6 +30,6 @@ sudo nano /etc/systemd/system/autologin@.service
 sudo systemctl enable autologin@tty1.service
 
 #waybar setup
-sudo cp /etc/xdg/waybar/ ~/.config/waybar/
-sudo nano ~/.config/waybar/config
+cp /etc/xdg/waybar/ ~/.config/waybar/
+nano ~/.config/waybar/config
   hyprland/workspaces #from sway/workspaces
