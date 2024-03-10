@@ -73,7 +73,7 @@ pacman -S networkmanager
 systemctl enable NetworkManager
 
 passwd
-```  [choosen root password here, twice]```
+```  [chosen root password here, twice]```
 
 useradd -m [choosen username]
 passwd [choosen username]
