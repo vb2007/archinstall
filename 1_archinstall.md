@@ -87,7 +87,6 @@ pacman -S networkmanager
 
 systemctl enable NetworkManager
 
-<<<<<<< HEAD
 passwd 
 ```[chosen root password here, twice]```
 
@@ -96,10 +95,6 @@ useradd -m [chosen username]
 passwd [chosen username]
 
 usermod -aG wheel,storage,power [chosen username]
-=======
-passwd
-```  [chosen root password here, twice]```
->>>>>>> 62a3365852376cb6b2ac6bd4a0beaf14c59126a2
 
 nano /etc/sudoers
 ```
