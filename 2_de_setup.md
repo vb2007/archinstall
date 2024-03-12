@@ -1,10 +1,13 @@
 # Installing a desktop environment (and other necessary things)
 
 sudo pacman -S hyprland waybar neofetch kitty thunar libreoffice openssh
+
 sudo systemctl enable sshd
+
 sudo systemctl start sshd
 
 ### Hyprland autostart
+
 sudo nano ~/.bash_profile
 ```
   if [[ -z "${DISPLAY}" ]] && [[ "${XDG_VTNR}" -eq 1 ]]; then
@@ -13,6 +16,7 @@ sudo nano ~/.bash_profile
 ```
 
 ### Autologin
+
 sudo nano /etc/systemd/logind.conf
 ```
   NAutoVTs=1 #NAutoVTs=6 uncomment & edit

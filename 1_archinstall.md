@@ -26,12 +26,17 @@ cfdisk /dev/sdX # where X is the correct disk
 ```
 
 mkfs.fat -F32 /dev/sdX1
+
 mkswap /dev/sdX2
+
 swapon /dev/sdX2
+
 mkfs.ext4 /dev/sdX3
 
 mount /dev/sdX3 /mnt
+
 mkdir /mnt/boot
+
 mount /dev/sdX1 /mnt/boot
 
 nano /etc/pacman.conf
@@ -44,40 +49,53 @@ nano /etc/pacman.conf
 ```
 
 pacstrap /mnt base base-devel linux linux-firmware git nano [intel or amd]-ucode
+
 genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt
+
 ln -sf /usr/share/zoneinfo/Europe/Budapest /etc/localtime # or other relevant timezone
+
 hwclock --systohc
 
 nano /etc/locale.gen
-```  #en_US.UTF-8 UTF-8 # <- uncomment```
+```
+#en_US.UTF-8 UTF-8 # <- uncomment
+```
 
 locale-gen
+
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 
-echo [választott hostname] > /etc/hostname
+echo [chosen hostname] > /etc/hostname
+
 nano /etc/hosts
 ```
   127.0.0.1 [TAB] localhost
   ::1 [TAB] localhost
-  127.0.0.1 [TAB] [choosen hostname].localdomain [choosen hostname]
+  127.0.0.1 [TAB] [chosen hostname].localdomain [chosen hostname]
 ```
 
 nano /etc/vconsole.conf
-```  #KEYMAP=us # <- change to: KEYMAP=hu```
+```
+#KEYMAP=us # <- change to: KEYMAP=hu
+```
 
 mkinitpcio -P
 
 pacman -S networkmanager
+
 systemctl enable NetworkManager
 
-passwd
-```  [choosen root password here, twice]```
+passwd 
+```[chosen root password here, twice]```
 
-useradd -m [choosen username]
-passwd [choosen username]
-usermod -aG wheel,storage,power [choosen username]
+useradd -m [chosen username]
+
+passwd [chosen username]
+
+usermod -aG wheel,storage,power [chosen username]
+
 nano /etc/sudoers
 ```
   #%wheel ALL=(ALL:ALL) ALL # <- uncomment
@@ -87,20 +105,26 @@ nano /etc/sudoers
 pacman -S grub efibootmgr
 
 grub-install --target=x86_64-efi --efi-directory=/boot
+
 grub-mkconfig -o /boot/grub/grub.cfg
 
 exit
+
 reboot
 
 ## Dualboot to Windows
 
 c # to enter grub shell
+
 ls # to list disks and partitions
+
 ls (hd0,gpt1)/ # go through partitions, and find the /efi folder
+
 #### then boot to Arch
+
 sudo nano /boot/grub/grub.cfg
 ```
-  # beneath the 'Arch Linux' part
+  # beneath (or above, personal preference) the 'Arch Linux' part
    menuentry 'Winfos 10/11'{
      insmod part_gpt
      insmod chain
