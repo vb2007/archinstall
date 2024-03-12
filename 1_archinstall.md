@@ -90,11 +90,14 @@ systemctl enable NetworkManager
 passwd 
 ```[chosen root password here, twice]```
 
-useradd -m [chosen username]
+useradd -m 
+```[chosen username]```
 
-passwd [chosen username]
+passwd 
+```[chosen username]```
 
-usermod -aG wheel,storage,power [chosen username]
+usermod -aG wheel,storage,power 
+```[chosen username]```
 
 nano /etc/sudoers
 ```
@@ -124,12 +127,12 @@ ls (hd0,gpt1)/ # go through partitions, and find the /efi folder
 
 sudo nano /boot/grub/grub.cfg
 ```
-  # beneath (or above, personal preference) the 'Arch Linux' part
-   menuentry 'Winfos 10/11'{
-     insmod part_gpt
-     insmod chain
-     set root=(hd0,gpt1) # or where the /efi folder was
-     chainloader /efi/Microsoft/Boot/bootmgfw.efi
-     boot
-   }
+# beneath (or above, personal preference) the 'Arch Linux' part
+  menuentry 'Winfos 10/11'{
+    insmod part_gpt
+    insmod chain
+    set root=(hd0,gpt1) # or where the /efi folder was
+    chainloader /efi/Microsoft/Boot/bootmgfw.efi
+    boot
+  }
 ```
