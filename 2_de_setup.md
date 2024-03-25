@@ -1,7 +1,7 @@
 # Installing a desktop environment (and other necessary things)
 
 ```shell
-sudo pacman -S hyprland waybar neofetch kitty thunar libreoffice openssh
+sudo pacman -S hyprland waybar neofetch kitty thunar libreoffice openssh wofi grim slurp wl-clipboard ttf-font-awesome ttf-dejavu
 ```
 
 ### Optional for SSH
