@@ -3,9 +3,11 @@
 ## Commands right after boot
 
 loadkeys hu
+
 timedatectl set-ntp true
 
 lsblk
+
 cfdisk /dev/sdX # where X is the correct disk
 ```
   New
@@ -43,9 +45,7 @@ nano /etc/pacman.conf
 ```
   #[multilib] # <-- uncomment
   #Include = /etc/pacman.d/mirrorlist # <- uncomment
-  #Color # <- uncomment
   #ParallelDownloads = 5 # <- uncomment
-  ILoveCandy # add line
 ```
 
 pacstrap /mnt base base-devel linux linux-firmware git nano [intel or amd]-ucode
@@ -78,7 +78,7 @@ nano /etc/hosts
 
 nano /etc/vconsole.conf
 ```
-#KEYMAP=us # <- change to: KEYMAP=hu
+KEYMAP=hu
 ```
 
 mkinitpcio -P
@@ -88,10 +88,10 @@ pacman -S networkmanager
 systemctl enable NetworkManager
 
 passwd 
+
 ```[chosen root password here, twice]```
 
-useradd -m 
-```[chosen username]```
+useradd -m  ```[chosen username]```
 
 passwd 
 ```[chosen username]```
@@ -103,6 +103,8 @@ nano /etc/sudoers
 ```
   #%wheel ALL=(ALL:ALL) ALL # <- uncomment
   #[optional]# Defaults timestamp_timeout=[when using sudo... 0 = always ask for password, positive number = don't ask for X minutes, negative number = only ask once in a session]
+
+  #%wheel ALL=(ALL:ALL) ALL NOPASSWD: ALL # <- or just uncomment this, so you can sudo without entering the password
 ```
 
 pacman -S grub efibootmgr
