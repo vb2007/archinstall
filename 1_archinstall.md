@@ -41,13 +41,6 @@ mkdir /mnt/boot
 
 mount /dev/sdX1 /mnt/boot
 
-nano /etc/pacman.conf
-```
-  #[multilib] # <-- uncomment
-  #Include = /etc/pacman.d/mirrorlist # <- uncomment
-  #ParallelDownloads = 5 # <- uncomment
-```
-
 pacstrap /mnt base base-devel linux linux-firmware git nano [intel or amd]-ucode
 
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -57,6 +50,13 @@ arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/Europe/Budapest /etc/localtime # or other relevant timezone
 
 hwclock --systohc
+
+nano /etc/pacman.conf
+```
+  #[multilib] # <-- uncomment
+  #Include = /etc/pacman.d/mirrorlist # <- uncomment
+  #ParallelDownloads = 5 # <- uncomment
+```
 
 nano /etc/locale.gen
 ```
