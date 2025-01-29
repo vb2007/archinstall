@@ -148,6 +148,10 @@ mkinitcpio -P
 ```
 
 ```shell
+pacman -Sy
+```
+
+```shell
 pacman -S networkmanager
 ```
 
