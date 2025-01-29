@@ -39,18 +39,18 @@ sudo nano /etc/systemd/logind.conf
 sudo nano /etc/systemd/system/autologin@.service
 ```
 ```
-  [Unit]
-  Description=Automatic Login
-  After=systemd-user-sessions.service
-  
-  [Service]
-  ExecStart=-/usr/bin/agetty --autologin *your-username* --noclear %I $TERM
-  Type=idle
-  Restart=always
-  RestartSec=0
-  
-  [Install]
-  WantedBy=getty.target
+[Unit]
+Description=Automatic Login
+After=systemd-user-sessions.service
+
+[Service]
+ExecStart=-/usr/bin/agetty --autologin *your-username* --noclear %I $TERM
+Type=idle
+Restart=always
+RestartSec=0
+
+[Install]
+WantedBy=getty.target
 ```
 
 ```shell
