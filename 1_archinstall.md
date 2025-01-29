@@ -144,7 +144,7 @@ KEYMAP=hu
 ```
 
 ```shell
-mkinitpcio -P
+mkinitcpio -P
 ```
 
 ```shell
