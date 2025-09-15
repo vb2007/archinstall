@@ -1,8 +1,7 @@
 # Installing a desktop environment (and other necessary things)
 
 ```shell
-sudo pacman -S hyprland waybar neofetch kitty thunar libreoffice openssh wofi grim slurp wl-clipboard ttf-font-awesome ttf-dejavu otf-font-awesome
-sudo pacman -S hyprland hyprpaper hyprlock waybar fastfetch kitty dolphin gvfs libreoffice openssh wofi grim slurp wl-clipboard ttf-font-awesome ttf-dejavu wget curl pipewire pipewire-jack wireplumber librewolf
+sudo pacman -S hyprland hyprpaper hyprlock waybar fastfetch kitty dolphin gvfs libreoffice openssh wofi grim slurp wl-clipboard wget curl pipewire pipewire-jack wireplumber librewolf ttf-font-awesome ttf-dejavu otf-font-awesome
 ```
 
 ## Nvidia & Intel iGPU drivers
