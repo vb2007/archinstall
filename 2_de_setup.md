@@ -1,8 +1,58 @@
 # Installing a desktop environment (and other necessary things)
 
 ```shell
-sudo pacman -S hyprland waybar neofetch kitty thunar libreoffice openssh wofi grim slurp wl-clipboard ttf-font-awesome ttf-dejavu
+sudo pacman -S hyprland hyprpaper hyprlock waybar fastfetch kitty dolphin gvfs libreoffice openssh wofi grim slurp wl-clipboard ttf-font-awesome ttf-dejavu wget curl pipewire pipewire-jack wireplumber librewolf
 ```
+
+## Nvidia & Intel iGPU drivers
+
+Installing drivers for Nvidia & Intel iGPU
+
+```shell
+sudo pacman -S nvidia nvidia-utils egl-wayland
+```
+
+Enable modeset for both GPUs (as stated in the [official docs](https://wiki.hypr.land/Nvidia/))
+
+```shell
+sudo nano /etc/modprobe.d/nvidia.conf
+```
+
+```shell
+#Add this line
+options nvidia_drm modeset=1
+```
+
+Enable early KMS
+
+```shell
+sudo nano /etc/mkinitcpio.conf
+```
+
+```shell
+#Modify this line
+MODULES=(i915 nvidia nvidia_modeset nvidia_uvm nvidia_drm)
+```
+
+Rebuild initramfs
+
+```shell
+sudo mkinitcpio -P
+```
+
+Add these enviroment variables to hyprland.conf
+
+```shell
+sudo nano ~/.config/hypr/hyprland.conf
+```
+
+```shell
+env = LIBVA_DRIVER_NAME,nvidia
+env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+```
+
+> **Warning**
+> Reboot after installing the drivers & making the other modifications
 
 ### Optional for SSH
 
