@@ -2,6 +2,8 @@
 
 For me, communication platforms (e.g.: Discord) couldn't access my microphone or allow screensharing.
 
+Lots of information came from [THIS](https://gitlab.com/librewolf-community/browser/linux/-/issues/173) issue.
+
 ## Microphone issues fix
 
 ### Testing if even the system can access the microphone
@@ -28,10 +30,23 @@ You should see the codec addon and a warning text that displays: *OpenH264 Video
 
 After it installs succcesfully, continue setting / modifying the following values on the `about:config` page.
 
-Add Discord to the **resistFingerprint domain exception list**:
+Disable **resistFingerprint** and add Discord to the **resistFingerprint domain exception list**:
 
 ```
+privacy.resistFingerprinting =false
 privacy.resistFingerprinting.exemptedDomains =*.discord.com
+```
+
+**If you want to keep your user-agent string private, install a specifid spoofing extension as describer [HERE](https://gitlab.com/librewolf-community/browser/linux/-/issues/173#note_534079374).**
+
+[Link to the extension](https://addons.mozilla.org/en-US/firefox/addon/user-agent-string-switcher/)
+
+Open the extension, click on **Options** (bottom left), select **Custom Mode**, then paste in the following json content:
+
+```json
+{
+  "discord.com": "Mozilla/5.0 (Windows NT 10.0; rv:80.0) Gecko/20100101 Firefox/80.0"
+}
 ```
 
 Make sure WebRTC is set to true (should be true by default):
