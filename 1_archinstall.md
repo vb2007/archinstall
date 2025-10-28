@@ -118,7 +118,7 @@ echo LANG=en_US.UTF-8 > /etc/locale.conf
 ```
 
 ```shell
-echo [chosen hostname] > /etc/hostname
+echo [chosenHostname] > /etc/hostname
 ```
 
 ```shell
