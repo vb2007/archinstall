@@ -137,7 +137,7 @@ Add the following lines:
 nano /etc/vconsole.conf
 ```
 
-Add this line: 
+Add this line:
 
 ```
 KEYMAP=hu
