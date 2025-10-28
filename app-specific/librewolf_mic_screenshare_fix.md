@@ -37,7 +37,9 @@ privacy.resistFingerprinting =false
 privacy.resistFingerprinting.exemptedDomains =*.discord.com
 ```
 
-**If you want to keep your user-agent string private, install a specifid spoofing [extension](https://addons.mozilla.org/en-US/firefox/addon/user-agent-string-switcher/) as describer [HERE](https://gitlab.com/librewolf-community/browser/linux/-/issues/173#note_534079374).**
+**If you want to keep your user-agent string private, install a specifid spoofing extension as describer [HERE](https://gitlab.com/librewolf-community/browser/linux/-/issues/173#note_534079374).**
+
+[Firefox store link for extension](https://addons.mozilla.org/en-US/firefox/addon/user-agent-string-switcher/) [Extension's source code on GitHub](https://github.com/ray-lothian/UserAgent-Switcher/)
 
 Open the extension, click on **Options** (bottom left), select **Custom Mode**, then paste in the following json content:
 
