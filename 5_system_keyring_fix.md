@@ -43,8 +43,32 @@ Then create a database in its GUI, and set the following settings:
 
 ## Getting D-Bus to work correctly
 
+Install **libsecret**:
+
+```shell
+sudo pacman -S libsecret
+```
+
 Creater the D-Bus Service Symlink
 
 ```shell
 sudo ln -s /usr/share/dbus-1/services/org.keepassxc.KeePassXC.service /usr/share/dbus-1/services/org.freedesktop.secrets.service
+```
+
+Verify that the symlink is correctly set:
+
+```shell
+ls -l /usr/share/dbus-1/services/org.freedesktop.secrets.service
+```
+
+*A correct output looks something like this:*
+
+```shell
+lrwxrwxrwx 1 root root 58 Oct 28 21:36 /usr/share/dbus-1/services/org.freedesktop.secrets.service -> /usr/share/dbus-1/services/org.keepassxc.KeePassXC.service
+```
+
+( *Element-specific* ) Start Element once from the terminal with a password-store option:
+
+```shell
+element-desktop --password-store="gnome-libsecret"
 ```
