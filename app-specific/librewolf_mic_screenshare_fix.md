@@ -2,13 +2,32 @@
 
 For me, communication platforms (e.g.: Discord) couldn't access my microphone or allow screensharing.
 
-Lots of information came from [THIS](https://gitlab.com/librewolf-community/browser/linux/-/issues/173) issue.
-
 ## Microphone issues fix
 
 ### Testing if even the system can access the microphone
 
+### Giving microphone access to LibreWolf
+
+As suggested in one of the comments below [THIS](https://www.reddit.com/r/LibreWolf/comments/m2pq2n/unable_to_access_microphone_and_camera/) post.
+
+```
+media.getusermedia.screensharing.enabled = true
+media.navigator.enabled = true
+media.navigator.video.enabled = true
+media.peerconnection.enabled = true
+media.peerconnection.ice.default_address_only = false
+media.peerconnection.ice.no_host = false
+media.peerconnection.ice.tcp = true
+media.peerconnection.identity.enabled = true
+media.peerconnection.identity.timeout = 10000
+media.peerconnection.turn.disable = false
+media.peerconnection.use_document_iceservers = true
+media.peerconnection.video.enabled
+```
+
 ## Screenshare issues fix
+
+Lots of information came from [THIS](https://gitlab.com/librewolf-community/browser/linux/-/issues/173) issue.
 
 Making screensharing work requires setting/modifying some LibreWolf config values on the `about:config` page:
 
