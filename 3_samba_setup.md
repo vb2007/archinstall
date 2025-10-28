@@ -31,3 +31,30 @@ sudo chmod 600 /etc/samba/credentials
 ```
 
 ## Auto-mounting on boot
+
+Creating a mount point:
+
+```shell
+sudo mkdir -p /mnt/share1
+```
+
+Adding automount to fstab (open the fstab file):
+
+```shell
+sudo nano /etc/fstab
+```
+
+Enter the relevant mount config:
+
+```shell
+//server-ip/share-name /mnt/share1 cifs credentials=/etc/samba/credentials,noauto,x-systemd.automount,x-systemd.idle-timeout=1min,uid=1000,gid=1000,iocharset=utf8 0 0
+```
+
+Reloading systemd & testing:
+
+```shell
+sudo systemctl daemon-reload
+sudo systemctl restart remote-fs.target
+```
+
+You should be able to see the mounted shared folder.
