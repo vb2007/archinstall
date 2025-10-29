@@ -6,6 +6,97 @@ For me, communication platforms (e.g.: Discord) couldn't access my microphone or
 
 ### Testing if even the system can access the microphone
 
+You can install **alsa-utils** and record a test file to make sure your microphone is set up correctly:
+
+```shell
+sudo pacman -S alsa-utils
+arecord -f cd -d 5 test.wav
+aplay test.wav
+```
+
+### Configuring microphone on system-level
+
+If you haven't already, install the `pipewire-pulse` package for compatibility:
+
+```shell
+sudo pacman -S pipewire-pulse
+```
+
+Check available devices with the following command:
+
+```shell
+wpctl status
+```
+
+The output should look something like this:
+
+```
+PipeWire 'pipewire-0' [1.4.9, vb2007@vbDesktop, cookie:3368655778]
+ └─ Clients:
+        32. xdg-desktop-portal-hyprland         [1.4.9, vb2007@vbDesktop, pid:926]
+        33. WirePlumber                         [1.4.9, vb2007@vbDesktop, pid:929]
+        41. WirePlumber [export]                [1.4.9, vb2007@vbDesktop, pid:929]
+        42. waybar                              [1.4.9, vb2007@vbDesktop, pid:859]
+        43. waybar                              [1.4.9, vb2007@vbDesktop, pid:859]
+        44. waybar                              [1.4.9, vb2007@vbDesktop, pid:859]
+        74. wpctl                               [1.4.9, vb2007@vbDesktop, pid:15080]
+
+Audio
+ ├─ Devices:
+ │      45. AD106M High Definition Audio Controller [alsa]
+ │      46. G733 Gaming Headset                 [alsa]
+ │      47. Built-in Audio                      [alsa]
+ │
+ ├─ Sinks:
+ │      54. AD106M High Definition Audio Controller Digital Stereo (HDMI) [vol: 0.40]
+ │  *   55. G733 Gaming Headset Analog Stereo   [vol: 0.70]
+ │      57. Built-in Audio Analog Stereo        [vol: 0.35]
+ │
+ ├─ Sources:
+ │  *   56. G733 Gaming Headset Mono            [vol: 1.00]
+ │      58. Built-in Audio Analog Stereo        [vol: 1.00]
+ │
+ ├─ Filters:
+ │
+ └─ Streams:
+
+Video
+ ├─ Devices:
+ │
+ ├─ Sinks:
+ │
+ ├─ Sources:
+ │
+ ├─ Filters:
+ │
+ └─ Streams:
+ ```
+
+ In this case, I'm setting the *G733 Gaming Headset Mono* source (56) as the default input device.
+
+ You can set a default device with the following command:
+
+ ```shell
+ wpctl set-default 56 #where 56 is the source microphone id
+ wpctl set-default 55 #if you want to set a default output as well
+ ```
+
+Make sure to set the microphone's volume correctly (e.g. to 80%):
+
+```shell
+wpctl set-volume 56 0.8
+```
+
+After performing all modifications, restart the audio services:
+
+```shell
+systemctl --user restart wireplumber pipewire pipewire-pulse
+```
+
+**Restart LibreWolf as well, and check if Discord & the browser can access your microphone.**
+
+If issues it still can't access/detect your microphone, try setting some LibreWolf specific configurations as described below.
+
 ### Giving microphone access to LibreWolf
 
 As suggested in one of the comments below [THIS](https://www.reddit.com/r/LibreWolf/comments/m2pq2n/unable_to_access_microphone_and_camera/) post.
@@ -22,7 +113,7 @@ media.peerconnection.identity.enabled = true
 media.peerconnection.identity.timeout = 10000
 media.peerconnection.turn.disable = false
 media.peerconnection.use_document_iceservers = true
-media.peerconnection.video.enabled
+media.peerconnection.video.enabled =true
 ```
 
 ## Screenshare issues fix
@@ -56,7 +147,7 @@ privacy.resistFingerprinting =false
 privacy.resistFingerprinting.exemptedDomains =*.discord.com
 ```
 
-**If you want to keep your user-agent string private, install a specifid spoofing extension as describer [HERE](https://gitlab.com/librewolf-community/browser/linux/-/issues/173#note_534079374).**
+**If you want to keep your user-agent string private, install a specifid spoofing extension as described [HERE](https://gitlab.com/librewolf-community/browser/linux/-/issues/173#note_534079374).**
 
 [Firefox store link for extension](https://addons.mozilla.org/en-US/firefox/addon/user-agent-string-switcher/) [Extension's source code on GitHub](https://github.com/ray-lothian/UserAgent-Switcher/)
 
