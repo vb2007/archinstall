@@ -30,7 +30,7 @@ Refresh the desktop entries:
 update-desktop-database ~/.local/share/applications/
 ```
 
-## Fixing audio issues (muted/low quality audio)
+## Fixing audio issues (no output / low quality)
 
 Simply installing the `pipewire-pulse` compatibility layer package should resolve every audio issues:
 
