@@ -10,12 +10,6 @@ Copy the dekstop entry to your local applications directory, so you don't have t
 sudo cp -r /usr/share/applications/tv.plex.PlexDesktop.desktop ~/.local/share/applications/tv.plex.PlexDesktop.desktop
 ```
 
-When you're done with the desktop entry modification(s) (window and/or audio fix) mentioned below, don't forget to refresh the desktop entries:
-
-```shell
-update-desktop-database ~/.local/share/applications/
-```
-
 ## Fixing invisible/buggy window
 
 Modify the desktop entry to launch Plex correctly:
@@ -28,6 +22,12 @@ Change launch options at the `EXEC=` line:
 
 ```shell
 Exec=env QT_QPA_PLATFORM=xcb Plex
+```
+
+Refresh the desktop entries:
+
+```shell
+update-desktop-database ~/.local/share/applications/
 ```
 
 ## Fixing audio issues (muted/low quality audio)
