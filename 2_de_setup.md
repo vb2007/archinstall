@@ -115,3 +115,19 @@ sudo cp /etc/xdg/waybar/ ~/.config/waybar/
 ```
   # Then edit the config files at ~/.config/waybar/ as you like
 ```
+
+## Setting a default browser
+
+If you install multiple browser (chromium, librewolf, firefox, so on...), this should be useful.
+
+Getting the current default browser:
+
+```shell
+xdg-settings get default-web-browser
+```
+
+Setting a default browser (e.g. LibreWolf):
+
+```shell
+xdg-settings set default-web-browser librewolf.desktop
+```
