@@ -54,7 +54,7 @@ env = __GLX_VENDOR_LIBRARY_NAME,nvidia
 > **Warning**
 > Reboot after installing the drivers & making the other modifications
 
-### Optional for SSH
+## Optional for SSH
 
 ```shell
 sudo systemctl enable sshd
@@ -64,7 +64,7 @@ sudo systemctl enable sshd
 sudo systemctl start sshd
 ```
 
-### Hyprland autostart
+## Hyprland autostart
 
 ```shell
 sudo nano ~/.bash_profile
@@ -75,7 +75,7 @@ if [[ -z "${DISPLAY}" ]] && [[ "${XDG_VTNR}" -eq 1 ]]; then
 fi
 ```
 
-### Autologin
+## Autologin
 
 ```shell
 sudo nano /etc/systemd/logind.conf
@@ -107,7 +107,7 @@ WantedBy=getty.target
 sudo systemctl enable autologin@tty1.service
 ```
 
-### Waybar
+## Waybar
 
 ```shell
 sudo cp /etc/xdg/waybar/ ~/.config/waybar/
