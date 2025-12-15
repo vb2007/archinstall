@@ -51,7 +51,7 @@ env = LIBVA_DRIVER_NAME,nvidia
 env = __GLX_VENDOR_LIBRARY_NAME,nvidia
 ```
 
-> **Warning**
+> [!WARNING]
 > Reboot after installing the drivers & making the other modifications
 
 ## Optional for SSH
