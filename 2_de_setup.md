@@ -1,7 +1,7 @@
 # Installing a desktop environment (and other necessary things)
 
 ```shell
-sudo pacman -S hyprland hyprpaper hyprlock hyprpicker xdg-desktop-portal-hyprland waybar fastfetch kitty cosmic-files cosmic-settings-daemon unzip zip tar p7zip gvfs libreoffice openssh wofi grim slurp wl-clipboard wget curl pipewire pipewire-jack pipewire-pulse wireplumber librewolf ttf-font-awesome ttf-dejavu otf-font-awesome
+sudo pacman -S hyprland hyprpaper hyprlock hyprpicker hyprpwcenter xdg-desktop-portal-hyprland waybar fastfetch kitty cosmic-files cosmic-settings-daemon unzip zip tar p7zip gvfs libreoffice openssh wofi grim slurp wl-clipboard wget curl pipewire pipewire-jack pipewire-pulse wireplumber librewolf ttf-font-awesome ttf-dejavu otf-font-awesome
 ```
 
 ## Nvidia & Intel iGPU drivers
